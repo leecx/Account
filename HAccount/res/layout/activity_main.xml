@@ -1,202 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-     android:background="@drawable/white_bg">
-    
-     <RelativeLayout
-         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/head_layout"
-        android:background="@drawable/new_top_bg">
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/transfer"
-            android:text="转    账"
-            android:textSize="17sp"
-            android:textColor="#FFFFFF"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"/>
-    </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="match_parent">
-         <RelativeLayout 
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/ly_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/assets"
-        android:background="@drawable/assets"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="总资产"
-                 android:textSize="25dp"
-                 android:textColor="#595959"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentLeft="true"
-                 android:layout_marginLeft="10dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/zongzican_text"
-                 android:text="0.0"
-                 android:textSize="25dp"
-                 android:textColor="#595959"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_marginRight="10dp"/>
-         </RelativeLayout>
-    
-         <RelativeLayout 
-             android:layout_height="60dp"
-             android:layout_width="match_parent"
-             android:id="@+id/cash"
-             android:layout_below="@+id/assets"
-             android:layout_marginTop="20dp" 
-             android:layout_marginLeft="20dp"
-             android:layout_marginRight="20dp" 
-             android:background="@drawable/cash">
-             <ImageView android:layout_width="30dp"
-                 android:layout_height="30dp"
-                 android:background="@drawable/icon_account_xianjin_new"
-                 android:id="@+id/xianjin_jpg"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginTop="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/xianjin_jpg"
-                 android:text="现金余额"
-                 android:textColor="#FFFFFF"
-                 android:textSize="15dp"
-                 android:gravity="bottom"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginBottom="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/xianjin_text"
-                 android:text="0"
-                 android:textSize="15dp"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_marginRight="6dp"
-                 android:textColor="#FFFFFF"/>"
-         </RelativeLayout>
-         <RelativeLayout 
-             android:layout_height="60dp"
-             android:layout_width="match_parent"
-             android:id="@+id/deposit"
-             android:layout_below="@+id/cash"
-             android:layout_marginTop="20dp"
-             android:layout_marginLeft="20dp"
-             android:layout_marginRight="20dp" 
-             android:background="@drawable/deposit">
-              <ImageView android:layout_width="30dp"
-                 android:layout_height="30dp"
-                 android:background="@drawable/icon_account_yinhangka"
-                 android:id="@+id/chuxu_jpg"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginTop="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/chuxu_jpg"
-                 android:text="储蓄卡余额"
-                 android:textColor="#FFFFFF"
-                 android:textSize="15dp"
-                 android:gravity="bottom"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginBottom="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/chuxu_text"
-                 android:text="0"
-                 android:textSize="15dp"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_marginRight="6dp"
-                 android:textColor="#FFFFFF"/>
-         </RelativeLayout>
-         <RelativeLayout 
-             android:layout_height="60dp"
-             android:layout_width="match_parent"
-             android:id="@+id/credit"
-             android:layout_below="@+id/deposit"
-             android:layout_marginTop="20dp"
-             android:layout_marginLeft="20dp"
-             android:layout_marginRight="20dp" 
-             android:background="@drawable/credit">
-             
-              <ImageView android:layout_width="30dp"
-                 android:layout_height="30dp"
-                 android:background="@drawable/icon_account_yinhangka"
-                 android:id="@+id/xinyon_jpg"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginTop="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/xinyon_jpg"
-                 android:text="信用卡余额"
-                 android:textColor="#FFFFFF"
-                 android:textSize="15dp"
-                 android:gravity="bottom"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginBottom="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/xinyongka_text"
-                 android:text="0"
-                 android:textSize="15dp"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_marginRight="6dp"
-                 android:textColor="#FFFFFF"/>
-         </RelativeLayout>
-         <RelativeLayout 
-             android:layout_height="60dp"
-             android:layout_width="match_parent"
-             android:id="@+id/webaccount"
-             android:layout_below="@+id/credit"
-             android:layout_marginTop="20dp"
-             android:layout_marginLeft="20dp"
-             android:layout_marginRight="20dp" 
-             android:layout_marginBottom="20dp"
-             android:background="@drawable/webaccount">
-             
-             <ImageView android:layout_width="30dp"
-                 android:layout_height="30dp"
-                 android:background="@drawable/icon_account_zhifubao"
-                 android:id="@+id/web_jpg"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginTop="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/web_jpg"
-                 android:text="网络账户余额"
-                 android:textColor="#FFFFFF"
-                 android:textSize="15dp"
-                 android:gravity="bottom"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginLeft="6dp"
-                 android:layout_marginBottom="6dp"/>
-             <TextView android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/web_text"
-                 android:text="0"
-                 android:textSize="15dp"
-                 android:layout_centerVertical="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_marginRight="6dp"
-                 android:textColor="#FFFFFF"/>
-         </RelativeLayout>
-        
+        android:layout_height="48dp"
+        android:background="@color/bg_topbar">
+
+        <TextView
+            android:id="@+id/txt_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="提醒"
+            android:textColor="@color/text_topbar"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/div_white" />
+
     </RelativeLayout>
-   
-   
-    
-</LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_white"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_channel"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_channel"
+            android:text="@string/tab_menu_alert" />  
+
+        <RadioButton
+            android:id="@+id/rb_message"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_message"
+            android:text="@string/tab_menu_profile" />
+
+        <RadioButton
+            android:id="@+id/rb_better"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_better"
+            android:text="@string/tab_menu_pay" />
+
+        <RadioButton
+            android:id="@+id/rb_setting"
+            style="@style/tab_menu_item"
+            android:drawableTop="@drawable/tab_menu_setting"
+            android:text="@string/tab_menu_setting" />
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/div_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_above="@id/rg_tab_bar"
+        android:background="@color/div_white" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/div_tab_bar"
+        android:layout_below="@id/ly_top_bar" />
+
+
+</RelativeLayout>
