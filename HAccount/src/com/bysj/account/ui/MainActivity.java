@@ -1,13 +1,18 @@
-package com.bysj.account;
+package com.bysj.account.ui;
+
+import com.bysj.account.R;
+import com.bysj.account.adapter.MyFragmentPagerAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.Window;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -17,7 +22,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         ViewPager.OnPageChangeListener {
 
     //UI Objects
-    private TextView txt_topbar;
     private RadioGroup rg_tab_bar;
     private RadioButton rb_channel;
     private RadioButton rb_message;
@@ -45,7 +49,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     }
 
     private void bindViews() {
-        txt_topbar = (TextView) findViewById(R.id.txt_topbar);
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
         rb_channel = (RadioButton) findViewById(R.id.rb_channel);
         rb_message = (RadioButton) findViewById(R.id.rb_message);
@@ -87,6 +90,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     public void onPageSelected(int position) {
     }
 
+    
     @Override
     public void onPageScrollStateChanged(int state) {
         //state的状态有三个，0表示什么都没做，1正在滑动，2滑动完毕
@@ -106,5 +110,14 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
                     break;
             }
         }
+    }
+    
+    //添加按钮事件
+    public void onClick_keepAccout(View v){
+    	Toast.makeText(MainActivity.this, "aaaaaaaa", 0).show();
+    }
+    
+    public void onbillclick(View v){
+    	Toast.makeText(MainActivity.this, "aaaaaaaa", 0).show();
     }
 }
