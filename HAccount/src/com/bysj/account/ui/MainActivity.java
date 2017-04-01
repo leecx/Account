@@ -4,11 +4,14 @@ import com.bysj.account.R;
 import com.bysj.account.adapter.MyFragmentPagerAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -28,7 +31,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     private RadioButton rb_better;
     private RadioButton rb_setting;
     private ViewPager vpager;
-
+  
     private MyFragmentPagerAdapter mAdapter;
 
     //几个代表页面的常量
@@ -40,7 +43,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	this.requestWindowFeature(Window.FEATURE_NO_TITLE); 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
@@ -112,12 +114,14 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         }
     }
     
-    //添加按钮事件
+    //添加清单按钮事件，即打开记账页面
     public void onClick_keepAccout(View v){
-    	Toast.makeText(MainActivity.this, "aaaaaaaa", 0).show();
+    	Intent intent = new Intent(MainActivity.this,AddBill_Activity.class);
+    	startActivity(intent);
+    	
     }
     
-    public void onbillclick(View v){
-    	Toast.makeText(MainActivity.this, "aaaaaaaa", 0).show();
-    }
+    
+
+	
 }
