@@ -1,10 +1,10 @@
 package com.bysj.account.adapter;
 
+import com.bysj.account.ui.Fragment_bills;
+import com.bysj.account.ui.Fragment_chart;
 import com.bysj.account.ui.MainActivity;
-import com.bysj.account.ui.fragment_bills;
-import com.bysj.account.ui.fragment_wallet;
-import com.bysj.account.ui.fragment_chart;
-import com.bysj.account.ui.fragment_setting;
+import com.bysj.account.ui.Fragment_wallet;
+import com.bysj.account.ui.Fragment_setting;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,23 +14,26 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
- * Created by Jay on 2015/8/31 0031.
+ * 
+*@author  created by licx
+*@data    2017年4月1日---下午3:35:27
+*
  */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private final int PAGER_COUNT = 4;
-    private fragment_bills myFragment1 = null; 
-    private fragment_wallet myFragment2 = null;
-    private fragment_chart myFragment3 = null;
-    private fragment_setting myFragment4 = null;
+    private Fragment_bills myFragment1 = null; 
+    private Fragment_wallet myFragment2 = null;
+    private Fragment_chart myFragment3 = null;
+    private Fragment_setting myFragment4 = null;
 
 
     public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
-        myFragment1 = new fragment_bills();
-        myFragment2 = new fragment_wallet();
-        myFragment3 = new fragment_chart();
-        myFragment4 = new fragment_setting();
+        myFragment1 = new Fragment_bills();
+        myFragment2 = new Fragment_wallet();
+        myFragment3 = new Fragment_chart();
+        myFragment4 = new Fragment_setting();
     }
 
 

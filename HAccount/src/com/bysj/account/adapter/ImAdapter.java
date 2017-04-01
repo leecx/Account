@@ -11,11 +11,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+/**
+ * 单个adapter模板
+*@author  created by licx
+*@data    2017年4月1日---下午3:37:12
+*
+*@param <T>
+ */
 public abstract class ImAdapter<T> extends BaseAdapter {
 
 	private ArrayList<T> mData;
     private int mLayoutRes;           //布局id
-
+    
 
     public ImAdapter() {
     }

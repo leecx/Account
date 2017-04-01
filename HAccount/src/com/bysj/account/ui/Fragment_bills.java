@@ -26,7 +26,7 @@ import android.widget.Toast;
 /**
  * Created by Jay on 2015/8/28 0028.
  */
-public class fragment_bills extends Fragment  {
+public class Fragment_bills extends Fragment  {
 
 	
 	private View view;
@@ -34,7 +34,7 @@ public class fragment_bills extends Fragment  {
 	private ImAdapter<Bill> imAdapter = null;
 	private List<Bill> bills = null;
 	
-    public fragment_bills() {
+    public Fragment_bills() {
     }
 
     @Override

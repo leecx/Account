@@ -13,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 类型图标
- * @author j
- *
+ *   图标类型
+*@author  created by licx
+*@data    2017年4月1日---下午3:36:53
+*
  */
 public class GridViewAdapter extends BaseAdapter{
 

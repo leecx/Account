@@ -26,9 +26,9 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     //UI Objects
     private RadioGroup rg_tab_bar;
-    private RadioButton rb_channel;
-    private RadioButton rb_message;
-    private RadioButton rb_better;
+    private RadioButton rb_bills;
+    private RadioButton rb_wallet;
+    private RadioButton rb_chart;
     private RadioButton rb_setting;
     private ViewPager vpager;
   
@@ -40,21 +40,20 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         bindViews();
-        rb_channel.setChecked(true);
+        rb_bills.setChecked(true);
     }
 
     private void bindViews() {
         rg_tab_bar = (RadioGroup) findViewById(R.id.rg_tab_bar);
-        rb_channel = (RadioButton) findViewById(R.id.rb_channel);
-        rb_message = (RadioButton) findViewById(R.id.rb_message);
-        rb_better = (RadioButton) findViewById(R.id.rb_better);
+        rb_bills = (RadioButton) findViewById(R.id.rb_bills);
+        rb_wallet = (RadioButton) findViewById(R.id.rb_wallet);
+        rb_chart = (RadioButton) findViewById(R.id.rb_chart);
         rb_setting = (RadioButton) findViewById(R.id.rb_setting);
         rg_tab_bar.setOnCheckedChangeListener(this);
 
@@ -67,13 +66,13 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_channel:
+            case R.id.rb_bills:
                 vpager.setCurrentItem(PAGE_ONE);
                 break;
-            case R.id.rb_message:
+            case R.id.rb_wallet:
                 vpager.setCurrentItem(PAGE_TWO);
                 break;
-            case R.id.rb_better:
+            case R.id.rb_chart:
                 vpager.setCurrentItem(PAGE_THREE);
                 break;
             case R.id.rb_setting:
@@ -91,21 +90,19 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     @Override
     public void onPageSelected(int position) {
     }
-
-    
     @Override
     public void onPageScrollStateChanged(int state) {
         //state的状态有三个，0表示什么都没做，1正在滑动，2滑动完毕
         if (state == 2) {
             switch (vpager.getCurrentItem()) {
                 case PAGE_ONE:
-                    rb_channel.setChecked(true);
+                    rb_bills.setChecked(true);
                     break;
                 case PAGE_TWO:
-                    rb_message.setChecked(true);
+                    rb_wallet.setChecked(true);
                     break;
                 case PAGE_THREE:
-                    rb_better.setChecked(true);
+                    rb_chart.setChecked(true);
                     break;
                 case PAGE_FOUR:
                     rb_setting.setChecked(true);
@@ -118,10 +115,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     public void onClick_keepAccout(View v){
     	Intent intent = new Intent(MainActivity.this,AddBill_Activity.class);
     	startActivity(intent);
-    	
     }
     
-    
-
-	
 }

@@ -13,17 +13,17 @@ import android.widget.TextView;
 /**
  * Created by Jay on 2015/8/28 0028.
  */
-public class fragment_chart extends Fragment {
+public class Fragment_setting extends Fragment {
 
-    public fragment_chart() {
+    public Fragment_setting() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_content,container,false);
         TextView txt_content = (TextView) view.findViewById(R.id.txt_content);
-        txt_content.setText("第三个Fragment");
-        Log.e("HEHE", "3日狗");
+        txt_content.setText("第四个Fragment");
+        Log.e("HEHE", "4日狗");
         return view;
     }
 }

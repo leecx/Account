@@ -9,34 +9,37 @@
     <RadioGroup
         android:id="@+id/rg_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:background="@color/bg_white"
         android:orientation="horizontal" >
 
         <RadioButton
-            android:id="@+id/rb_channel"
+            android:id="@+id/rb_bills"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_channel"
+            android:drawableTop="@drawable/tab_menu_bills"
             android:text="@string/tab_menu_bills" />  
 
         <RadioButton
-            android:id="@+id/rb_message"
+            android:id="@+id/rb_wallet"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_message"
+            android:drawableTop="@drawable/tab_menu_wallet"
             android:text="@string/tab_menu_wallet" />
 		
         <ImageButton
             android:id="@+id/rb_keepAccount"
-            style="@style/tab_menu_item"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:background="@drawable/tab_menu_bg"
             android:src="@drawable/tab_keepa_ccount_normal"
             android:scaleType="fitCenter"
             android:onClick="onClick_keepAccout" />
         
         <RadioButton
-            android:id="@+id/rb_better"
+            android:id="@+id/rb_chart"
             style="@style/tab_menu_item"
-            android:drawableTop="@drawable/tab_menu_better"
+            android:drawableTop="@drawable/tab_menu_chart"
             android:text="@string/tab_menu_chart" />
 
         <RadioButton
