@@ -12,7 +12,6 @@ public class Bill {
 	
 	public Bill() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Bill(int bIcon, String bName, double bMoney, Date bDate) {
 		super();

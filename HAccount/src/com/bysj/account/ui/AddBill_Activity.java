@@ -361,6 +361,7 @@ public class AddBill_Activity extends Activity implements OnClickListener {
 			inbill = changedshow_number.getText().toString().trim();
 			in1=0;
 			in2=0;
+			
 			intype = changedshow_text.getText().toString().trim();
 			intime = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 			inent = new GridViewEntity();
@@ -370,6 +371,7 @@ public class AddBill_Activity extends Activity implements OnClickListener {
 			inent.setImg(indeximg);
 			inent.setTime(intime);
 			inent.setAccountName(cash_btn.getText().toString().trim());
+			
 			//insertBill(inent);
 			//UpdataAccount(inent);
 			break;

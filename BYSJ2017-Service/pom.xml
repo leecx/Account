@@ -1,14 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>BYSJ2017</groupId>
-  <artifactId>BYSJ2017</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>HAccount-Service</name>
-  <description>HAccount-Service</description>
-  
-  <!-- 定义集中版本号 --> 
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>BYSJ2017</groupId>
+	<artifactId>BYSJ2017</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>HAccount-Service</name>
+	<description>HAccount-Service</description>
+
+	<!-- 定义集中版本号 -->
+	<properties>
 		<junit.version>4.12</junit.version>
 		<spring.version>4.1.3.RELEASE</spring.version>
 		<mybatis.version>3.2.8</mybatis.version>
@@ -32,9 +33,12 @@
 		<jedis.version>2.7.2</jedis.version>
 		<solrj.version>4.10.3</solrj.version>
 	</properties>
-	
+
 	<!-- 依赖管理 -->
 	<dependencies>
+
+
+
 		<!-- Jackson Json处理工具包 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -128,7 +132,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>${jsp-api.version}</version>
-			<scope>provided</scope> 
+			<scope>provided</scope>
 		</dependency>
 		<!-- 文件上传组件 -->
 		<dependency>
@@ -137,15 +141,15 @@
 			<version>${commons-fileupload.version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -162,16 +166,16 @@
 		</plugins>
 
 		<resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
-  
-  
+
+
 </project>

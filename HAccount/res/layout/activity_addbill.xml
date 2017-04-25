@@ -38,7 +38,7 @@
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@+id/pay_btn"
             android:layout_weight="1"
-            android:background="@drawable/secrecy_no_activate"
+            android:background="@drawable/secrecy_no_activate" 
             android:text="收入"
             android:textColor="#595959"
             android:textSize="14sp" />
