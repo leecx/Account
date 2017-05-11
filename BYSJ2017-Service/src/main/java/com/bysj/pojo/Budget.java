@@ -1,14 +1,20 @@
 package com.bysj.pojo;
 
+/**
+ * 预算
+ * @author chenxin
+ *
+ */
 public class Budget {
+	/**id */
     private Integer id;
-
+    /**用户id */
     private Integer userid;
-
+    /**月份 */
     private Integer month;
-
+    /**金额 */
     private String num;
-
+    
     public Integer getId() {
         return id;
     }

@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="com.bysj.pojo.Shareaccount" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="friendId" property="friendid" jdbcType="INTEGER" />
+    <result column="friendid" property="friendid" jdbcType="INTEGER" />
     <result column="accountid" property="accountid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userid, friendId, accountid
+    id, userid, friendid, accountid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,7 +21,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bysj.pojo.Shareaccount" >
-    insert into ShareAccount (id, userid, friendId, 
+    insert into ShareAccount (id, userid, friendid, 
       accountid)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{friendid,jdbcType=INTEGER}, 
       #{accountid,jdbcType=INTEGER})
@@ -36,7 +36,7 @@
         userid,
       </if>
       <if test="friendid != null" >
-        friendId,
+        friendid,
       </if>
       <if test="accountid != null" >
         accountid,
@@ -64,7 +64,7 @@
         userid = #{userid,jdbcType=INTEGER},
       </if>
       <if test="friendid != null" >
-        friendId = #{friendid,jdbcType=INTEGER},
+        friendid = #{friendid,jdbcType=INTEGER},
       </if>
       <if test="accountid != null" >
         accountid = #{accountid,jdbcType=INTEGER},
@@ -75,7 +75,7 @@
   <update id="updateByPrimaryKey" parameterType="com.bysj.pojo.Shareaccount" >
     update ShareAccount
     set userid = #{userid,jdbcType=INTEGER},
-      friendId = #{friendid,jdbcType=INTEGER},
+      friendid = #{friendid,jdbcType=INTEGER},
       accountid = #{accountid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

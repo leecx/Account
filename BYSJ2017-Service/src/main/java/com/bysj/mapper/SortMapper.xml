@@ -3,13 +3,13 @@
 <mapper namespace="com.bysj.mapper.SortMapper" >
   <resultMap id="BaseResultMap" type="com.bysj.pojo.Sort" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="desc" property="desc" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parentId, name, desc, type
+    id, parentid, name, desc, type
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,7 +22,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bysj.pojo.Sort" >
-    insert into Sort (id, parentId, name, 
+    insert into Sort (id, parentid, name, 
       desc, type)
     values (#{id,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{desc,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
@@ -34,7 +34,7 @@
         id,
       </if>
       <if test="parentid != null" >
-        parentId,
+        parentid,
       </if>
       <if test="name != null" >
         name,
@@ -68,7 +68,7 @@
     update Sort
     <set >
       <if test="parentid != null" >
-        parentId = #{parentid,jdbcType=INTEGER},
+        parentid = #{parentid,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -84,7 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bysj.pojo.Sort" >
     update Sort
-    set parentId = #{parentid,jdbcType=INTEGER},
+    set parentid = #{parentid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       desc = #{desc,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}

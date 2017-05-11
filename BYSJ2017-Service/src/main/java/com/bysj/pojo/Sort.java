@@ -1,14 +1,20 @@
 package com.bysj.pojo;
 
+/**
+ * 分类
+ * @author chenxin
+ *
+ */
 public class Sort {
+	/**id */
     private Integer id;
-
+    /**父id */
     private Integer parentid;
-
+    /**名称 */
     private String name;
-
+    /**描述 */
     private String desc;
-
+    /**类型（收入/支出）*/
     private String type;
 
     public Integer getId() {

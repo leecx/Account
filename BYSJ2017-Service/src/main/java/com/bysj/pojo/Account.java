@@ -1,14 +1,20 @@
 package com.bysj.pojo;
 
+/**
+ * 账户
+ * @author chenxin
+ *
+ */
 public class Account {
-    private Integer id;
-
-    private Integer userid;
-
-    private String type;
-
-    private String num;
-
+	/**id */
+    private Integer id;       
+    /**用户id */
+    private Integer userid;   
+    /**账户类型 */
+    private String type;    
+    /**金额 */
+    private String num;     
+    
     public Integer getId() {
         return id;
     }

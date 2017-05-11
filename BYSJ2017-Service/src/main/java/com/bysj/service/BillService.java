@@ -3,6 +3,8 @@ package com.bysj.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bysj.mapper.BillMapper;
+
 /**
  *@author  created by licx
  *@data    2017年4月26日---下午5:12:04
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class BillService {
 
 	@Autowired
-	private BillService billService;
+	private BillMapper billMapper;
 	
 	//记一笔
 	//删除一条记录

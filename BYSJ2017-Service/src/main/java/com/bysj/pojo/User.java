@@ -1,14 +1,20 @@
 package com.bysj.pojo;
 
+/**
+ * 用户
+ * @author chenxin
+ *
+ */
 public class User {
+	/**id */
     private Integer id;
-
+    /**用户名 */
     private String username;
-
+    /**密码 */
     private String password;
-
+    /**头像 */
     private String icon;
-
+    
     public Integer getId() {
         return id;
     }

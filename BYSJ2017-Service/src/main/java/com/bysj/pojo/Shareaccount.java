@@ -1,14 +1,20 @@
 package com.bysj.pojo;
 
+/**
+ * 共享账户
+ * @author chenxin
+ *
+ */
 public class Shareaccount {
+	/**id */
     private Integer id;
-
+    /**用户id */
     private Integer userid;
-
+    /**对方id */
     private Integer friendid;
-
+    /**账户id */
     private Integer accountid;
-
+    
     public Integer getId() {
         return id;
     }

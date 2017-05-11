@@ -3,16 +3,16 @@
 <mapper namespace="com.bysj.mapper.BillMapper" >
   <resultMap id="BaseResultMap" type="com.bysj.pojo.Bill" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="accountId" property="accountid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="accountid" property="accountid" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="typeID" property="typeid" jdbcType="INTEGER" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
     <result column="time" property="time" jdbcType="TIME" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="num" property="num" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userid, accountId, type, typeID, time, remark, num
+    id, userId, accountid, type, typeid, time, remark, num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,8 +25,8 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bysj.pojo.Bill" >
-    insert into Bill (id, userid, accountId, 
-      type, typeID, time, remark, 
+    insert into Bill (id, userId, accountid, 
+      type, typeid, time, remark, 
       num)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{accountid,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, #{time,jdbcType=TIME}, #{remark,jdbcType=VARCHAR}, 
@@ -39,16 +39,16 @@
         id,
       </if>
       <if test="userid != null" >
-        userid,
+        userId,
       </if>
       <if test="accountid != null" >
-        accountId,
+        accountid,
       </if>
       <if test="type != null" >
         type,
       </if>
       <if test="typeid != null" >
-        typeID,
+        typeid,
       </if>
       <if test="time != null" >
         time,
@@ -91,16 +91,16 @@
     update Bill
     <set >
       <if test="userid != null" >
-        userid = #{userid,jdbcType=INTEGER},
+        userId = #{userid,jdbcType=INTEGER},
       </if>
       <if test="accountid != null" >
-        accountId = #{accountid,jdbcType=INTEGER},
+        accountid = #{accountid,jdbcType=INTEGER},
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="typeid != null" >
-        typeID = #{typeid,jdbcType=INTEGER},
+        typeid = #{typeid,jdbcType=INTEGER},
       </if>
       <if test="time != null" >
         time = #{time,jdbcType=TIME},
@@ -116,10 +116,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bysj.pojo.Bill" >
     update Bill
-    set userid = #{userid,jdbcType=INTEGER},
-      accountId = #{accountid,jdbcType=INTEGER},
+    set userId = #{userid,jdbcType=INTEGER},
+      accountid = #{accountid,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
-      typeID = #{typeid,jdbcType=INTEGER},
+      typeid = #{typeid,jdbcType=INTEGER},
       time = #{time,jdbcType=TIME},
       remark = #{remark,jdbcType=VARCHAR},
       num = #{num,jdbcType=VARCHAR}

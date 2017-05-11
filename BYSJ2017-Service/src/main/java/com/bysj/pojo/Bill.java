@@ -2,84 +2,90 @@ package com.bysj.pojo;
 
 import java.util.Date;
 
+/**
+ * 记账数据
+ * @author chenxin
+ *
+ */
 public class Bill {
-	private Integer id;
+	/**id */
+    private Integer id;	
+    /**用户id */
+    private Integer userid;
+    /**账户id */
+    private Integer accountid;
+    /**类型（收入/支出） */
+    private String type;
+    /**类别 */
+    private Integer typeid;
+    /**时间 */
+    private Date time;
+    /**备注 */
+    private String remark;
+    /**金额 */
+    private String num;
 
-	private Integer userid;
+    public Integer getId() {
+        return id;
+    }
 
-	private Integer accountid;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	private String type;
+    public Integer getUserid() {
+        return userid;
+    }
 
-	private Integer typeid;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 
-	private Date time;
+    public Integer getAccountid() {
+        return accountid;
+    }
 
-	private String remark;
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
+    }
 
-	private String num;
+    public String getType() {
+        return type;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getTypeid() {
+        return typeid;
+    }
 
-	public Integer getUserid() {
-		return userid;
-	}
+    public void setTypeid(Integer typeid) {
+        this.typeid = typeid;
+    }
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
-	}
+    public Date getTime() {
+        return time;
+    }
 
-	public Integer getAccountid() {
-		return accountid;
-	}
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
-	public void setAccountid(Integer accountid) {
-		this.accountid = accountid;
-	}
+    public String getRemark() {
+        return remark;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
 
-	public void setType(String type) {
-		this.type = type == null ? null : type.trim();
-	}
+    public String getNum() {
+        return num;
+    }
 
-	public Integer getTypeid() {
-		return typeid;
-	}
-
-	public void setTypeid(Integer typeid) {
-		this.typeid = typeid;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark == null ? null : remark.trim();
-	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num == null ? null : num.trim();
-	}
+    public void setNum(String num) {
+        this.num = num == null ? null : num.trim();
+    }
 }
