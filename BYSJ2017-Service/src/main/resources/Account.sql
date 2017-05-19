@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-05-11 15:38:40
+Date: 2017-05-17 14:07:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,12 +106,14 @@ CREATE TABLE `Sort` (
 DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
   `id` int(11) NOT NULL DEFAULT '0' COMMENT 'id',
-  `username` varchar(255) DEFAULT NULL COMMENT '账号',
+  `username` varchar(255) NOT NULL DEFAULT '' COMMENT '账号',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `icon` varchar(255) DEFAULT NULL COMMENT '头像',
-  PRIMARY KEY (`id`)
+  `phone` varchar(255) DEFAULT NULL COMMENT 's手机号',
+  PRIMARY KEY (`id`,`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of User
 -- ----------------------------
+INSERT INTO `User` VALUES ('1', '111111', '111111', null, '123456');

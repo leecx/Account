@@ -14,8 +14,18 @@ public class User {
     private String password;
     /**头像 */
     private String icon;
+    /**手机号*/
+    private String phone;
     
-    public Integer getId() {
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -46,4 +56,11 @@ public class User {
     public void setIcon(String icon) {
         this.icon = icon == null ? null : icon.trim();
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", icon=" + icon + ", phone=" + phone + "]";
+	}
+    
 }
