@@ -2,6 +2,7 @@ package com.bysj.service;
 
 import java.util.UUID;
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,6 +101,10 @@ public class UserService {
 		User user = userMapper.selectByPhone(phone);
 		return user;
 		
+	}
+	public User selectByUsername(String username){
+		User user = userMapper.selectByUsername(username);
+		return user;
 	}
 	
 	// 用户注销（session注销，或则cookie操作）

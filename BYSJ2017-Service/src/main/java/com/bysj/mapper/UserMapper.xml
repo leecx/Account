@@ -106,6 +106,14 @@
     from User
     where phone = #{phone,jdbcType=VARCHAR}
   </select>
+  <!-- 通过用户名查询User -->
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"></include>
+  	from User
+  	where username = #{username,jdbcType=VARCHAR}
+  </select>
+  
   <!-- 查询昵称是否唯一 -->
   <select id="countByName" parameterType="java.lang.String" resultType="java.lang.Integer">
   	select count(*) from User where username = #{username}

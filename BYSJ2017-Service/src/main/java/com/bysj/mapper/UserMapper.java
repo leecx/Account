@@ -22,6 +22,8 @@ public interface UserMapper {
     int login(@Param("phone") String phone,@Param("password") String password);
 
 	User selectByPhone(String phone);
+	
+	User selectByUsername(String username);
 
 	int countByName(String name);
 

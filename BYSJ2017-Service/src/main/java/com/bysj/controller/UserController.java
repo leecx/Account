@@ -1,19 +1,12 @@
 package com.bysj.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bysj.pojo.User;
@@ -133,8 +126,12 @@ public class UserController {
 	@RequestMapping("/update")
 	public Result updateUser(User user,HttpServletRequest request,HttpServletResponse response){
 		User sessionUser = (User) request.getSession().getAttribute("user");
-		if(StringUtils.isNotBlank(user.getPhone())){
-			String phone = user.getPhone();
+		String phone = user.getPhone();
+		String username = user.getUsername();
+		if(StringUtils.isNotBlank(phone)){    //是否为空
+			if(userService.selectByPhone(phone)!=null){
+				return new Result(404, "手机号已存在");
+			}
 			sessionUser.setPhone(phone);
 			boolean flage = userService.updateUser(sessionUser);
 			if(flage){
@@ -142,8 +139,10 @@ public class UserController {
 				return new Result(200, "修改电话成功！");
 			}
 		}
-		if(StringUtils.isNotBlank(user.getUsername())){
-			String username = user.getUsername();
+		if(StringUtils.isNotBlank(username)){
+			if(userService.selectByUsername(username)!=null){
+				return new Result(404, "用户名已存在");
+			}
 			sessionUser.setUsername(username);
 			boolean flage = userService.updateUser(sessionUser);
 			if(flage){
