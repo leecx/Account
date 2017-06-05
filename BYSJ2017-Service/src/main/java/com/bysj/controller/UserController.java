@@ -1,7 +1,11 @@
 package com.bysj.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import com.bysj.pojo.User;
 import com.bysj.pojo.result.Result;
 import com.bysj.service.UserService;
 import com.bysj.utils.IdentifyCode;
+import com.bysj.utils.JsonUtils;
 import com.bysj.utils.SendSMS;
 
 /**
@@ -29,7 +34,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
+	
 	// 功能：验证账号是否存在
 	@RequestMapping("/testPhone")
 	public Result testPhone(String phone, HttpServletResponse response)
@@ -152,6 +158,16 @@ public class UserController {
 		}
 		return new Result(404, "修改失败！");
 	}
+	//验证密码是testPsd
+	@RequestMapping("/testPsd")
+	public Result testPsd(HttpServletRequest request,String password){
+		User user = (User) request.getSession().getAttribute("user");
+		if(user.getPassword().equals(password)){
+			return Result.Ok();
+		}
+		return new Result(404, "密码错误");
+	}
+
 	
 	//登录状态
 	@RequestMapping("/loginState")
@@ -174,5 +190,15 @@ public class UserController {
 			return new Result(200, "退出成功");
 		}
 		return new Result(404, "未登录");
+	}
+	
+	//获得个人信息
+	@RequestMapping("getUser")
+	public Map<String, Object> getUser(HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", 200);
+		map.put("user", user);
+		return map;
 	}
 }

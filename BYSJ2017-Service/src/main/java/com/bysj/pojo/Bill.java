@@ -2,6 +2,8 @@ package com.bysj.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 记账数据
  * @author chenxin
@@ -14,18 +16,28 @@ public class Bill {
     private Integer userid;
     /**账户id */
     private Integer accountid;
-    /**类型（收入/支出） */
+    /**类型（收入/支出） 0为收入，1为支出*/  
     private String type;
     /**类别 */
     private Integer typeid;
     /**时间 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date time;
     /**备注 */
     private String remark;
     /**金额 */
-    private String num;
+    private Double num;
+    /**成员*/
+    private String member;
+    public String getMember() {
+		return member;
+	}
 
-    public Integer getId() {
+	public void setMember(String member) {
+		this.member = member;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -81,11 +93,11 @@ public class Bill {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getNum() {
+    public Double getNum() {
         return num;
     }
 
-    public void setNum(String num) {
-        this.num = num == null ? null : num.trim();
+    public void setNum(Double num) {
+        this.num = num;
     }
 }

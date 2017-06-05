@@ -13,7 +13,7 @@ public class Account {
     /**账户类型 */
     private String type;    
     /**金额 */
-    private String num;     
+    private Double num;     
     
     public Integer getId() {
         return id;
@@ -39,11 +39,11 @@ public class Account {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getNum() {
+    public Double getNum() {
         return num;
     }
 
-    public void setNum(String num) {
-        this.num = num == null ? null : num.trim();
+    public void setNum(Double num) {
+        this.num = num;
     }
 }

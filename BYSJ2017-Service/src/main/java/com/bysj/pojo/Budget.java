@@ -12,10 +12,23 @@ public class Budget {
     private Integer userid;
     /**月份 */
     private Integer month;
+    /**年份*/
+    private Integer year;
     /**金额 */
-    private String num;
+    private Double num;
+    /**类型*/
+    private int typeId;
+  
     
-    public Integer getId() {
+    public int getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -39,11 +52,28 @@ public class Budget {
         this.month = month;
     }
 
-    public String getNum() {
+    public Double getNum() {
         return num;
     }
 
-    public void setNum(String num) {
-        this.num = num == null ? null : num.trim();
+    public void setNum(Double num) {
+        this.num = num ;
     }
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	@Override
+	public String toString() {
+		return "Budget [id=" + id + ", userid=" + userid + ", month=" + month
+				+ ", year=" + year + ", num=" + num + ", typeId=" + typeId
+				+ "]";
+	}
+
+	
+    
 }

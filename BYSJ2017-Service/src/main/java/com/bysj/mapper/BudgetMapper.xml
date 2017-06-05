@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bysj.mapper.BudgetMapper" >
+  
   <resultMap id="BaseResultMap" type="com.bysj.pojo.Budget" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
     <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER"/>
     <result column="num" property="num" jdbcType="VARCHAR" />
+    <result column="typeId" property="typeId" jdbcType="INTEGER"/>
   </resultMap>
+  
   <sql id="Base_Column_List" >
-    id, userid, month, num
+    id, userid, month, num,typeId,year
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,9 +26,9 @@
   </delete>
   <insert id="insert" parameterType="com.bysj.pojo.Budget" >
     insert into Budget (id, userid, month, 
-      num)
+      num,typeId,year)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, 
-      #{num,jdbcType=VARCHAR})
+      #{num,jdbcType=VARCHAR},#{typeId,jdbcType=INTEGER},#{year,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.bysj.pojo.Budget" >
     insert into Budget
@@ -41,6 +45,12 @@
       <if test="num != null" >
         num,
       </if>
+      <if test="typeId!=null">
+      	typeId,
+      </if>
+      <if test="year!=null">
+      	year,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,6 +64,12 @@
       </if>
       <if test="num != null" >
         #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId!=null">
+      	#{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="year!=null">
+      	#{year,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -69,6 +85,12 @@
       <if test="num != null" >
         num = #{num,jdbcType=VARCHAR},
       </if>
+      <if test="typeId!=null">
+      	typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="year!=null">
+      	year=#{year,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -76,7 +98,54 @@
     update Budget
     set userid = #{userid,jdbcType=INTEGER},
       month = #{month,jdbcType=INTEGER},
-      num = #{num,jdbcType=VARCHAR}
+      num = #{num,jdbcType=VARCHAR},
+      typeId = #{typeId,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 按条件查询 -->
+  <select id="selectByEx" resultMap="BaseResultMap" parameterType="com.bysj.pojo.Budget">
+    select 
+    <include refid="Base_Column_List" />
+    from Budget where 1=1
+   	  <if test="userid != null" >
+       and userid = #{userid,jdbcType=INTEGER}
+      </if>
+      <if test="month != null" >
+       and month = #{month,jdbcType=INTEGER}
+      </if>
+      <if test="num != null" >
+       and num = #{num,jdbcType=VARCHAR}
+      </if>
+      <if test="typeId!=null">
+      and typeId = #{typeId,jdbcType=INTEGER}
+      </if>
+      <if test="year!=null">
+      	and year = #{year,jdbcType=INTEGER}
+      </if>
+  </select>
+  
+  <!-- 当月总预算 -->
+  <select id="sumBudget" resultType="java.lang.Double">
+  	SELECT SUM(num) from Budget where month = #{month} AND year = #{year}  AND userid=#{userId}
+  </select>
+  
+  <!-- 查询当月预算list -->
+  <select id="selectByMonth" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from Budget
+    where month = #{month,jdbcType=INTEGER} and year = #{year} and userid = #{userId}
+  </select>
+  
+  <!-- 查询该类型下该年月是否有预算 -->
+  <select id="selectCountByTypeId" resultType="java.lang.Integer">
+  	select count(id) from Budget where
+  		month = #{month,jdbcType=INTEGER} 
+  	and year = #{year} 
+  	and userid = #{userId}
+  	and typeId = #{typeId}
+  </select>
+  
+  
 </mapper>

@@ -14,4 +14,6 @@ public interface SortMapper {
     int updateByPrimaryKeySelective(Sort record);
 
     int updateByPrimaryKey(Sort record);
+    
+    Sort selectByName(String name);
 }

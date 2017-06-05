@@ -25,5 +25,13 @@
 		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path=""/>
+			<mvc:mapping path=""/>
+			<bean class="com.bysj.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 
 </beans>

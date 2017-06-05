@@ -5,11 +5,12 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="parentid" property="parentid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="descp" property="descp" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR"/> 
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parentid, name, desc, type
+    id, parentid, name, descp, type,img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +24,9 @@
   </delete>
   <insert id="insert" parameterType="com.bysj.pojo.Sort" >
     insert into Sort (id, parentid, name, 
-      desc, type)
+      descp, type)
     values (#{id,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{desc,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR})
+      #{descp,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},#{img,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bysj.pojo.Sort" >
     insert into Sort
@@ -39,11 +40,14 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="descp != null" >
+        descp,
       </if>
       <if test="type != null" >
         type,
+      </if>
+      <if test="img !=null">
+      	img,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -56,11 +60,14 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="descp != null" >
+        #{descp,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="img!=null">
+      	#{img,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -73,11 +80,14 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="descp != null" >
+        descp = #{descp,jdbcType=VARCHAR},
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="img!=null">
+      	img = #{img,jdbcType=VARCHAR}
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -86,8 +96,17 @@
     update Sort
     set parentid = #{parentid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      descp = #{descp,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}
+      img = #{img,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 通过名字查找 -->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from Sort
+    where name = #{name,jdbcType=VARCHAR} 
+  </select>
 </mapper>

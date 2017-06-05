@@ -13,11 +13,29 @@ public class Sort {
     /**名称 */
     private String name;
     /**描述 */
-    private String desc;
+    private String descp;
     /**类型（收入/支出）*/
     private String type;
+    /**图片*/
+    private String img;
 
-    public Integer getId() {
+    public String getDescp() {
+		return descp;
+	}
+
+	public void setDescp(String descp) {
+		this.descp = descp;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -42,11 +60,11 @@ public class Sort {
     }
 
     public String getDesc() {
-        return desc;
+        return descp;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+        this.descp = desc == null ? null : desc.trim();
     }
 
     public String getType() {

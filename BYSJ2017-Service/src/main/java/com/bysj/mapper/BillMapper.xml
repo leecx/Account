@@ -7,12 +7,13 @@
     <result column="accountid" property="accountid" jdbcType="INTEGER" />
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="typeid" property="typeid" jdbcType="INTEGER" />
-    <result column="time" property="time" jdbcType="TIME" />
+    <result column="time" property="time" jdbcType="DATE" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="num" property="num" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="DOUBLE" />
+    <result column="member" property="member" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, userId, accountid, type, typeid, time, remark, num
+    id, userId, accountid, type, typeid, time, remark, num,member
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.bysj.pojo.Bill" >
     insert into Bill (id, userId, accountid, 
       type, typeid, time, remark, 
-      num)
+      num,member)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{accountid,jdbcType=INTEGER}, 
-      #{type,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, #{time,jdbcType=TIME}, #{remark,jdbcType=VARCHAR}, 
-      #{num,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, #{time,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
+      #{num,jdbcType=DOUBLE},#{member,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bysj.pojo.Bill" >
     insert into Bill
@@ -59,6 +60,9 @@
       <if test="num != null" >
         num,
       </if>
+      <if test="member!=null">
+      	member,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -77,13 +81,16 @@
         #{typeid,jdbcType=INTEGER},
       </if>
       <if test="time != null" >
-        #{time,jdbcType=TIME},
+        #{time,jdbcType=DATE},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
       <if test="num != null" >
-        #{num,jdbcType=VARCHAR},
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="member!=null">
+      	#{member,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -103,13 +110,16 @@
         typeid = #{typeid,jdbcType=INTEGER},
       </if>
       <if test="time != null" >
-        time = #{time,jdbcType=TIME},
+        time = #{time,jdbcType=DATE},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="num != null" >
-        num = #{num,jdbcType=VARCHAR},
+        num = #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="member!=null">
+      	member=#{member,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -120,9 +130,92 @@
       accountid = #{accountid,jdbcType=INTEGER},
       type = #{type,jdbcType=VARCHAR},
       typeid = #{typeid,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIME},
+      time = #{time,jdbcType=DATE},
       remark = #{remark,jdbcType=VARCHAR},
-      num = #{num,jdbcType=VARCHAR}
+      num = #{num,jdbcType=DOUBLE},
+      member=#{member,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 该日期区间的支出 -->
+  <select id="selectPayByDayRegion" resultType="java.lang.Double">
+  <![CDATA[ 
+  	select SUM(num) 
+  	from Bill 
+  	where 
+  	userId = #{userId,jdbcType=INTEGER} 
+  	and time >= #{startDay,jdbcType=DATE} 
+  	and time <= #{endDay,jdbcType=DATE}
+  	and type = 1
+  ]]>
+  </select>
+  
+  <!-- 该日期区间的收入 -->
+  <select id="selectIncomeByDayRegion" resultType="java.lang.Double">
+  <![CDATA[ 
+  	select SUM(num) 
+  	from Bill 
+  	where 
+  	userId = #{userId,jdbcType=INTEGER} 
+  	and time >= #{startDay,jdbcType=DATE} 
+  	and time <= #{endDay,jdbcType=DATE}
+  	and type = 0
+  ]]>
+  </select>
+  
+  <!-- 今天收入 -->
+  <select id="selectIncomeByday" resultType="java.lang.Double">
+  	select SUM(num) 
+  	from Bill 
+  	where 
+  	userId = #{userId,jdbcType=INTEGER} 
+  	and time = #{date,jdbcType=DATE} 
+  	and type = 0
+  </select>
+  
+   <!-- 今天支出 -->
+  <select id="selectPayByday" resultType="java.lang.Double">
+  	select SUM(num) 
+  	from Bill 
+  	where 
+  	userId = #{userId,jdbcType=INTEGER} 
+  	and time = #{date,jdbcType=DATE} 
+  	and type = 1
+  </select>
+  
+  <!-- 该类型月支出 -->
+  <select id="selectMonthPayByTypeId" resultType="java.lang.Double">
+  	<![CDATA[ 
+  	select SUM(num) 
+  	from Bill b,Sort s 
+  	where 
+  	s.id = b.typeId
+  	and b.userId = #{userId,jdbcType=INTEGER}
+  	and (b.typeId = #{typeId,jdbcType=INTEGER} or s.parentid = #{typeId,jdbcType=INTEGER})
+  	and b.time >= #{startDay,jdbcType=DATE} 
+  	and b.time <= #{endDay,jdbcType=DATE}
+  	and b.type = 1
+  ]]>
+  </select>
+  
+  <!-- 按条件查询 -->
+  <select id="selectByEx" resultMap="BaseResultMap" parameterType="com.bysj.pojo.example.BillEx" >
+    select 
+    <include refid="Base_Column_List" />
+    from Bill where userId = #{userId}
+    <if test="startDay!=null">
+    and time>=#{startDay}
+    </if>
+    <if test="endDay!=null">
+    <![CDATA[and time<= #{endDay}]]>
+    </if>
+    <if test="member!=null">
+    and member=#{member}
+    </if>
+    <if test="type!=null">
+    and type = #{type}
+    </if>
+    <if test=""></if>
+  </select>
+  
 </mapper>

@@ -14,6 +14,7 @@ public class Result {
 	private String message;
 	
 	
+	
 	public Result(){}
 	
 	public Result(int code,String message){
@@ -24,6 +25,10 @@ public class Result {
 	
 	public static Result Ok(){
 		return new Result(200, "OK");
+	}
+	
+	public static Result notLogin(){
+		return new Result(404, "未登录");
 	}
 	
 
@@ -42,6 +47,7 @@ public class Result {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 
 
 }
