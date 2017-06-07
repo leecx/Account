@@ -59,11 +59,11 @@ public class UserController {
 	
 	// 功能：注册
 	@RequestMapping("/register")
-	public Result register(User user, HttpServletRequest request, Integer code,
+	public Result register(User user, HttpServletRequest request, String code,
 			HttpServletResponse response) throws Exception {
 		System.out.println(user.getPassword());
-		Integer identifyCode = (Integer) request.getSession().getAttribute("identifyCode");
-		if (code == identifyCode) { // 验证码输入正确
+		String identifyCode = (String) request.getSession().getAttribute("identifyCode");
+		if (code.equals(identifyCode)) { // 验证码输入正确
 			userService.register(user);
 			return Result.Ok();
 		} else {

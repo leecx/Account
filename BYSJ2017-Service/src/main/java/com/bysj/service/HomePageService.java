@@ -40,15 +40,15 @@ public class HomePageService {
 		billResult.setUsername(user.getUsername());			//名字
 		int userId = user.getId();
 		billResult.setNowDayIncome(billMapper.selectIncomeByday(userId, date));  //今日收入
-		billResult.setNowDayPay(billMapper.selectIncomeByday(userId, date));	 //今日支出
+		billResult.setNowDayPay(billMapper.selectPayByday(userId, date));	 //今日支出
 		if(billResult.getNowDayIncome()>0&&billResult.getNowDayPay()>0){		//是否记账
-			billResult.setRecordText(false);
-		}else{
 			billResult.setRecordText(true);
+		}else{
+			billResult.setRecordText(false);
 		}
 		
-		Date lastDayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.MONDAY).toDate();
-		Date firstDayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.SUNDAY).toDate();
+		Date  firstDayOfWeek= dateTime.withDayOfWeek(DateTimeConstants.MONDAY).toDate();
+		Date lastDayOfWeek = dateTime.withDayOfWeek(DateTimeConstants.SUNDAY).toDate();
 		Double WeekIncome = billMapper.selectIncomeByDayRegion(userId,firstDayOfWeek,lastDayOfWeek);
 		Double WeekPay = billMapper.selectPayByDayRegion(userId,firstDayOfWeek,lastDayOfWeek);
 		billResult.setNowWeekIncome(WeekIncome);				  	//本周收入
@@ -64,7 +64,13 @@ public class HomePageService {
 		billResult.setMonthRegion(DateUtil.getMonthInterval(date));   //本月区间
 		
 		Double budgets = budgetMapper.sumBudget(userId, dateTime.getMonthOfYear(), dateTime.getYear()); //本月预算
-		Double budgetBalance = monthPay - budgets;                                      //本月预算余额
+		if(monthPay==null){
+			monthPay = 0.0;
+		}
+		if(budgets==null){
+			budgets=0.0;
+		}
+		Double budgetBalance = budgets - monthPay;                                      //本月预算余额
 		billResult.setBudgetBalance(budgetBalance);
 		
 		return billResult;

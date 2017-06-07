@@ -79,4 +79,12 @@
       accountid = #{accountid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from ShareAccount
+    where userid = #{userId,jdbcType=INTEGER}
+  </select>
+  
 </mapper>

@@ -13,9 +13,17 @@ public class Result {
 	
 	private String message;
 	
+	private List<?> list;
+	
 	
 	
 	public Result(){}
+	
+	public Result(int code,String message,List<?> list){
+		this.code = code;
+		this.message = message;
+		this.list = list;
+	}
 	
 	public Result(int code,String message){
 		this.code = code;
@@ -46,6 +54,13 @@ public class Result {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public List<?> getList() {
+		return list;
+	}
+
+	public void setList(List<?> list) {
+		this.list = list;
 	}
 
 

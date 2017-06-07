@@ -1,6 +1,9 @@
 package com.bysj.controller;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bysj.pojo.Bill;
 import com.bysj.pojo.User;
+import com.bysj.pojo.example.BillEx;
 import com.bysj.pojo.result.Result;
 import com.bysj.service.BillService;
+import com.bysj.service.ChartService;
 import com.bysj.service.SortService;
 
 /**
@@ -23,19 +28,28 @@ import com.bysj.service.SortService;
 @Controller
 @RestController
 @RequestMapping("/bill")
-public class BillController {
+public class BillController extends BaseController {
 	
 	@Autowired
 	private BillService billService;
 	@Autowired
 	private SortService sortService;
+	@Autowired
+	private ChartService chartService;
 	
 	@RequestMapping("/test")
 	public void test(Bill bill){
 		System.out.println(bill.getTime());
 	}
 	
-	
+	/**
+	 * 添加账单
+	 * @param request
+	 * @param bill
+	 * @param session
+	 * @param typeName
+	 * @return
+	 */
 	@RequestMapping("/addBill")
 	public Result addBill(HttpServletRequest request,Bill bill,HttpSession session,String typeName){
 		User user = (User) session.getAttribute("user");
@@ -61,4 +75,46 @@ public class BillController {
 		return new Result(404, "添加失败");
 	}
 	
+	/**
+	 * 柱状图
+	 * @param request
+	 * @param session
+	 * @param billEx
+	 * @return
+	 */
+	@RequestMapping("/getBarData")
+	public Map getBarData(HttpServletRequest request,HttpSession session,BillEx billEx){
+		User user = getSessionUser(session);
+		billEx.setUserId(user.getId());
+		Map map = chartService.getBarData(billEx,user);
+		if(!map.isEmpty()){
+			map.put("code", 200);
+		}else{
+			map.put("code", 404);
+		}
+		return map;
+	}
+	
+	/**
+	 * 饼状图
+	 * @param request
+	 * @param session
+	 * @param billEx
+	 * @return
+	 */
+	@RequestMapping("/getPieData")
+	public Map getPieData(HttpServletRequest request,HttpSession session,BillEx billEx){
+		User user = getSessionUser(session);
+		Map map = new HashMap();
+		billEx.setUserId(user.getId());
+		List<Map> pieData = chartService.getPieData(billEx);
+		if(!pieData.isEmpty()){
+			map.put("data", pieData);
+			map.put("code", 200);
+		}else{
+			map.put("code", 404);
+		}
+		return map;
+		
+	}
 }

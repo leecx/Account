@@ -36,6 +36,7 @@ public class HomeController extends BaseController {
 		if(user!=null){
 			billResult = homepageService.getBillResult(user);
 			billResult.setLogin(true);
+			billResult.setCode(200);
 		}
 		return billResult;
 	}

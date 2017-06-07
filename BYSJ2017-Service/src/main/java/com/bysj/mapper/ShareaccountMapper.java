@@ -1,5 +1,7 @@
 package com.bysj.mapper;
 
+import java.util.List;
+
 import com.bysj.pojo.Shareaccount;
 
 public interface ShareaccountMapper {
@@ -14,4 +16,8 @@ public interface ShareaccountMapper {
     int updateByPrimaryKeySelective(Shareaccount record);
 
     int updateByPrimaryKey(Shareaccount record);
+    
+    //通过userid查询所有关联账户
+    List<Shareaccount> selectByUserId(Integer userId);
+    
 }
