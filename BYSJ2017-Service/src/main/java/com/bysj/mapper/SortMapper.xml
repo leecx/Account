@@ -109,4 +109,9 @@
     from Sort
     where name = #{name,jdbcType=VARCHAR} 
   </select>
+  
+  <select id="selectSortsOfPay" resultMap="BaseResultMap">
+  	SELECT * FROM Sort WHERE  type='支出' AND parentid IS NULL
+  </select>
+  
 </mapper>

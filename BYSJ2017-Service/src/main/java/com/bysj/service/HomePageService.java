@@ -25,7 +25,12 @@ public class HomePageService {
 	private BillMapper billMapper;
 	@Autowired
 	private BudgetMapper budgetMapper;
-
+	
+	/**
+	 * 首页显示
+	 * @param user
+	 * @return
+	 */
 	public BillResult getBillResult(User user) {
 
 		BillResult billResult = new BillResult();
@@ -41,7 +46,7 @@ public class HomePageService {
 		int userId = user.getId();
 		billResult.setNowDayIncome(billMapper.selectIncomeByday(userId, date));  //今日收入
 		billResult.setNowDayPay(billMapper.selectPayByday(userId, date));	 //今日支出
-		if(billResult.getNowDayIncome()>0&&billResult.getNowDayPay()>0){		//是否记账
+		if(billResult.getNowDayIncome()>0||billResult.getNowDayPay()>0){		//是否记账
 			billResult.setRecordText(true);
 		}else{
 			billResult.setRecordText(false);

@@ -209,12 +209,54 @@
     <if test="endDay!=null">
     <![CDATA[and time<= #{endDay}]]>
     </if>
-    <if test="member!=null">
-    and member=#{member}
-    </if>
-    <if test="type!=null">
-    and type = #{type}
-    </if>
+    <choose>
+    	<when test="member=='全部'">
+    	</when>
+    	<when test="member=='家庭公共'">
+    	and member=#{member}
+    	</when>
+    	<otherwise>
+    	and member=#{userId}
+    	</otherwise>
+    </choose>
+    <choose>
+    	<when test="type=='支出'">
+    	and type ='1'
+    	</when>
+    	<when test="type=='收入'">
+    	and type = '0'
+    	</when>
+    	<when test="type=='全部'">
+    	</when>
+    </choose>
+    order by time
   </select>
+  
+  <select id="selectHomeSumByEx" resultType="java.lang.Double" parameterType="com.bysj.pojo.example.BillEx">
+  	select SUM(num)
+    from Bill where userId = #{userId}
+    <if test="startDay!=null">
+    and time>=#{startDay}
+    </if>
+    <if test="endDay!=null">
+    <![CDATA[and time<= #{endDay}]]>
+    </if>
+    	and member='家庭公共'
+    	and type ='1'
+  </select>
+  
+  <select id="selectPaySumByEx" resultType="java.lang.Double" parameterType="com.bysj.pojo.example.BillEx">
+  	select SUM(num)
+    from Bill where userId = #{userId}
+    <if test="startDay!=null">
+    and time>=#{startDay}
+    </if>
+    <if test="endDay!=null">
+    <![CDATA[and time<= #{endDay}]]>
+    </if>
+    	and member=#{userId}
+    	and type ='1'
+  </select>
+  
   
 </mapper>

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -19,6 +21,7 @@ import com.bysj.service.UserService;
 import com.bysj.utils.IdentifyCode;
 import com.bysj.utils.JsonUtils;
 import com.bysj.utils.SendSMS;
+import com.bysj.utils.SendSMS_new;
 
 /**
  * @author created by licx
@@ -28,7 +31,7 @@ import com.bysj.utils.SendSMS;
 @Controller
 @RequestMapping("/user")
 @RestController
-public class UserController {
+public class UserController extends BaseController {
 	
 	private static final Logger LOGGER= Logger.getLogger(UserController.class); 
 
@@ -75,15 +78,15 @@ public class UserController {
 	// 发送验证码
 	@RequestMapping("/sendSMS")
 	public Result sendSMS(String phone, HttpServletRequest request,
-			HttpServletResponse response) {
-		if(phone!=null){
-			String code = IdentifyCode.getCode();
-			if (SendSMS.send(code, phone)) {// 发送短信成功
+			HttpServletResponse response) throws Exception  {
+		String code = IdentifyCode.getCode();
+		if (phone != null) {
+			if (SendSMS.send(code, phone)) {
 				request.getSession().setAttribute("identifyCode", code); // 验证码放入session
 				return new Result(200, code);
 			}
 		}
-		return new Result(400, "失败");
+		return new Result(404, "失败");
 	}
 
 	// 功能：登陆
@@ -130,10 +133,11 @@ public class UserController {
 	
 	//修改个人信息
 	@RequestMapping("/update")
-	public Result updateUser(User user,HttpServletRequest request,HttpServletResponse response){
+	public Result updateUser(User user,HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		User sessionUser = (User) request.getSession().getAttribute("user");
 		String phone = user.getPhone();
 		String username = user.getUsername();
+		String icon = user.getIcon();
 		if(StringUtils.isNotBlank(phone)){    //是否为空
 			if(userService.selectByPhone(phone)!=null){
 				return new Result(404, "手机号已存在");
@@ -149,11 +153,22 @@ public class UserController {
 			if(userService.selectByUsername(username)!=null){
 				return new Result(404, "用户名已存在");
 			}
+			if(username.contains("(")&&username.contains(")")){
+				return new Result(404, "命名不规范");
+			}
 			sessionUser.setUsername(username);
 			boolean flage = userService.updateUser(sessionUser);
 			if(flage){
 				request.getSession().setAttribute("user", sessionUser);
 				return new Result(200, "修改昵称成功！");
+			}
+		}
+		if(StringUtils.isNoneBlank(icon)){
+			sessionUser.setIcon(icon);
+			boolean flag = userService.updateUser(sessionUser);
+			if(flag){
+				session.setAttribute("user", sessionUser);
+				return new Result(200, "修改头像成功");
 			}
 		}
 		return new Result(404, "修改失败！");

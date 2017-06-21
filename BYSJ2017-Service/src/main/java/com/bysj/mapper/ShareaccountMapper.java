@@ -20,4 +20,7 @@ public interface ShareaccountMapper {
     //通过userid查询所有关联账户
     List<Shareaccount> selectByUserId(Integer userId);
     
+    //删除互相关联
+	int deleteByShareAccount(Shareaccount shareaccount);
+    
 }

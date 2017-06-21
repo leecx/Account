@@ -1,5 +1,7 @@
 package com.bysj.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpSession;
 
 import com.bysj.pojo.User;
@@ -14,4 +16,5 @@ public class BaseController {
 	protected User getSessionUser(HttpSession session) {
 		return (User) session.getAttribute("user");
 	}
+	
 }

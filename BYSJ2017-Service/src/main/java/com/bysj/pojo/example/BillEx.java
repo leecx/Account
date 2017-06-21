@@ -41,13 +41,7 @@ public class BillEx {
 		return type;
 	}
 	public void setType(String type) {
-		if(type.equals("收入")){
-			this.type = "0";
-		}else if(type.equals("支出")){
-			this.type="1";
-		}else{
 			this.type = type;
-		}
 	}
 	public String getTypeName() {
 		return typeName;

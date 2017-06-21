@@ -18,6 +18,7 @@ import com.bysj.pojo.User;
 public class UserService {
 	
 	private static int i=0;
+	private static String url = "";
 
 	@Autowired
 	private UserMapper userMapper;
@@ -36,7 +37,8 @@ public class UserService {
 	public boolean register(User user) throws Exception {
 		if(StringUtils.isBlank(user.getUsername())){
 			String username="user"+ ++i;
-			user.setUsername(username);
+			user.setUsername(username);					//默认名字
+			user.setIcon("http://115.159.188.223/budget/business.jpg");//默认头像
 		}
 		// 插入
 		if (userMapper.insert(user) > 0) { // 插入成功

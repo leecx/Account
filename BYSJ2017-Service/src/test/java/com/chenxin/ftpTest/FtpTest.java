@@ -16,7 +16,7 @@ public class FtpTest {
 	public static void main(String[] args) throws SocketException, IOException {
 		FTPClient ftpClient = new FTPClient();
 		ftpClient.connect("115.159.188.223");
-		ftpClient.login("www", "p71qOFHAF4n9");
+		ftpClient.login("ftpuser", "ftpuser");
 		FileInputStream inputStream = new FileInputStream(new File(
 				"D:/1.jpg"));
 		ftpClient.setFileType(FTP.BINARY_FILE_TYPE);

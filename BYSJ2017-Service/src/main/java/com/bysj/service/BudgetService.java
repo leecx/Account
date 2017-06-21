@@ -101,15 +101,27 @@ public class BudgetService {
 			budgetDetail.setBalance(balance);								//余额
 			budgetDetail.setBudget(budget.getNum());						//预算
 			budgetDetail.setImg(sort.getImg());								//图片
-			budgetDetail.setPercent(percent);								//百分比
+			budgetDetail.setPercent(percent);								//百分比  可用的/总共的
 			details.add(budgetDetail);
 		}
 		budgetDetailResult.setUse(use);
 		budgetDetailResult.setBudgets(budgets);
 		budgetDetailResult.setUnUse(unUse);
 		budgetDetailResult.setBudgetDetails(details);
-
+		//如果为空，则返回所有预算为0返回
+		if(budgetDetailResult.getBudgetDetails().size()==0){
+			List<Sort> sorts = sortMapper.selectSortsOfPay();
+			for(Sort sort:sorts){
+				BudgetDetail budgetDetail = new BudgetDetail();
+				budgetDetail.setBalance(0.0);
+				budgetDetail.setBudget(0.0);
+				budgetDetail.setImg(sort.getImg());
+				budgetDetail.setName(sort.getName());
+				budgetDetail.setPercent(0.0);
+				details.add(budgetDetail);
+			}
+			budgetDetailResult.setBudgetDetails(details);
+		}
 		return budgetDetailResult;
-
 	}
 }

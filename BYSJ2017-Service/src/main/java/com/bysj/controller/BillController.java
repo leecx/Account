@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bysj.pojo.Bill;
 import com.bysj.pojo.User;
 import com.bysj.pojo.example.BillEx;
+import com.bysj.pojo.result.BillDetails;
 import com.bysj.pojo.result.Result;
 import com.bysj.service.BillService;
 import com.bysj.service.ChartService;
@@ -64,7 +65,9 @@ public class BillController extends BaseController {
 		}else if(type.equals("支出")){
 			bill.setType("1");
 		}
-		
+		if(bill.getMember()!="家庭公共"){
+			bill.setMember(user.getId().toString());
+		}
 		int typeId = sortService.findIdByName(typeName);
 		bill.setTypeid(typeId);            //设置类型
 		
@@ -74,6 +77,36 @@ public class BillController extends BaseController {
 		}
 		return new Result(404, "添加失败");
 	}
+	
+	/**
+	 * 删除账单条目
+	 * @param request
+	 * @param session
+	 * @param Id
+	 * @return
+	 */
+	@RequestMapping("/deleteBill")
+	public Result deleteBill(HttpServletRequest request,HttpSession session,Integer id){
+		Result result = billService.deleteBill(id);
+		return result;
+	}
+	
+	/**
+	 * 获得账单明细
+	 * @param session
+	 * @param billEx
+	 * @return
+	 */
+	@RequestMapping("/getBills")
+	public Result getBills(HttpSession session,BillEx billEx){
+		User user = getSessionUser(session);
+		if(billEx.getType().equals("收入")&&billEx.getMember().contains("(家庭公共)")){
+			return new Result(404, "查询不规范");
+		}
+		List<BillDetails> billsByEx = billService.selectBillsByEx(billEx, user);
+		return new Result(200, "成功", billsByEx);
+	}
+	
 	
 	/**
 	 * 柱状图
@@ -107,6 +140,12 @@ public class BillController extends BaseController {
 		User user = getSessionUser(session);
 		Map map = new HashMap();
 		billEx.setUserId(user.getId());
+		String member = billEx.getMember();
+		if(billEx.getType().equals("收入")&&member.contains("(家庭公共)")){
+			map.put("code", 404);
+			map.put("message","查询不规范");
+			return map;
+		}
 		List<Map> pieData = chartService.getPieData(billEx);
 		if(!pieData.isEmpty()){
 			map.put("data", pieData);

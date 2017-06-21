@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -33,11 +34,14 @@ public class CORSFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		System.out.println(req.getRemoteHost());
 		HttpServletResponse response = (HttpServletResponse) res;
+		HttpServletRequest request = (HttpServletRequest) req;
+		String realIp = request.getHeader("X-Real-IP");
+		
 		response.setHeader("Access-Control-Allow-Credentials","true");
-		//response.setHeader("Access-Control-Allow-Origin", "http://172.16.91.150:8080");
-	    response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+		//response.setHeader("Access-Control-Allow-Origin", "http://"+req.getRemoteAddr());
+		response.setHeader("Access-Control-Allow-Origin","null");
+		//response.setHeader("Access-Control-Allow-Origin","http://localhost:8080");
 		//response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 	    response.setHeader("Access-Control-Max-Age", "3600");

@@ -45,4 +45,10 @@ public interface BillMapper {
 	//更具查询条件，查询出对应的bill
 	List<Bill> selectByEx(BillEx billEx);
 	
+	//查询家庭公共
+	Double selectHomeSumByEx(BillEx billEx);
+	
+	//查询除开家庭公共
+	Double selectPaySumByEx(BillEx billEx);
+	
 }

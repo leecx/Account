@@ -1,5 +1,7 @@
 package com.bysj.mapper;
 
+import java.util.List;
+
 import com.bysj.pojo.Sort;
 
 public interface SortMapper {
@@ -16,4 +18,7 @@ public interface SortMapper {
     int updateByPrimaryKey(Sort record);
     
     Sort selectByName(String name);
+    
+    //查询所有支出一级目录
+    List<Sort> selectSortsOfPay();
 }

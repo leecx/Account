@@ -1,10 +1,12 @@
 package com.bysj.controller;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +45,11 @@ public class BudgetController extends BaseController {
 	@RequestMapping("/addBudget")
 	public Result addBudget(HttpServletRequest request, Budget budget,
 			HttpSession session, String typeName) {
+		DateTime nowTime = new DateTime(new Date().getTime()).withDayOfMonth(1);
+		DateTime budTime = new DateTime().withYear(budget.getYear()).withMonthOfYear(budget.getMonth()).withDayOfMonth(1);
+		if(budTime.isBefore(nowTime)){
+			return new Result(404, "以前时间无法设置预算");
+		}
 		
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
