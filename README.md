@@ -1,4 +1,4 @@
 # Account
-��ҵ��ƣ������ƶ�App�ļ�ͥ�������ϵͳ<br>
-1��BYSJ2017-Service   �����<br>
-2��HAccount           �ͻ���<br>
+毕业设计：基于移动App的家庭账务管理系统<br>
+1，BYSJ2016-Service   服务端<br>
+2，HAccount           客户端<br>
